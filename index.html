@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAR Chemicals Pvt. Ltd. | Molecular Innovation & Industrial Impact</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #0ea5e9;
+        }
+
+        /* Chart Container Rules */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            height: 350px;
+            max-height: 450px;
+        }
+
+        /* Hero Section Gradient Overlay */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.8) 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+
+        /* Bullseye Diagram (CSS Only) */
+        .bullseye-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            padding-bottom: 100%;
+            margin: 0 auto;
+        }
+        
+        .circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .circle:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            z-index: 20;
+        }
+
+        .c-1 { width: 100%; height: 100%; background-color: #f59e0b; z-index: 1; }
+        .c-2 { width: 80%; height: 80%; background-color: #fbbf24; z-index: 2; }
+        .c-3 { width: 60%; height: 60%; background-color: #38bdf8; z-index: 3; }
+        .c-4 { width: 40%; height: 40%; background-color: #0ea5e9; z-index: 4; }
+        .c-5 { width: 20%; height: 20%; background-color: #0f172a; z-index: 5; align-items: center;}
+
+        .circle-label {
+            margin-top: 15px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        /* AI Glow Effect */
+        .ai-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.1);
+            transition: all 0.3s ease;
+        }
+        .ai-card:hover {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.2);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+        .pulse-dot {
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+
+        section {
+            padding: 80px 0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav sticky top-0 z-[100] text-white">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <a href="#" class="text-2xl font-extrabold tracking-tighter hover:text-sky-400 transition">
+                    <span class="text-sky-500">RAR</span> Chemicals
+                </a>
+                <span class="text-[10px] uppercase tracking-[0.2em] text-slate-400">React & Refine</span>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+                <a href="#about" class="hover:text-sky-400 transition">About</a>
+                <a href="#innovation" class="hover:text-sky-400 transition">Innovation Lab</a>
+                <a href="#products" class="hover:text-sky-400 transition">Products</a>
+                <a href="#infrastructure" class="hover:text-sky-400 transition">Infrastructure</a>
+                <a href="#contact" class="bg-sky-500 text-slate-900 px-5 py-2 rounded-full hover:bg-white transition shadow-lg">Contact Us</a>
+            </div>
+
+            <!-- Mobile Menu Placeholder (Hidden for simplicity) -->
+            <button class="md:hidden text-sky-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden text-white pt-24">
+        <!-- Abstract Background Pattern -->
+        <div class="absolute inset-0 z-0 bg-slate-900">
+            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#0ea5e9 1px, transparent 1px); background-size: 40px 40px;"></div>
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center lg:text-left grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="inline-block bg-sky-500/20 text-sky-400 border border-sky-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Global Partner in Hydrogenation</span>
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
+                    Sustainable Chemistry <br> 
+                    <span class="text-sky-500">React & Refine</span>
+                </h1>
+                <p class="text-lg text-slate-300 max-w-xl leading-relaxed">
+                    Dedicated to molecular innovation and industrial impact. We provide world-class catalysts and specialized regeneration services for a cleaner, more efficient industrial future.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                    <a href="#innovation" class="px-8 py-4 bg-sky-500 text-slate-900 font-bold rounded-xl shadow-xl hover:bg-white transition duration-300">Explore AI Lab ✨</a>
+                    <a href="#products" class="px-8 py-4 border-2 border-slate-700 font-bold rounded-xl hover:bg-slate-800 transition duration-300">View Products</a>
+                </div>
+            </div>
+            
+            <!-- Quick Stats in Hero -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700 card-hover">
+                    <h3 class="text-4xl font-extrabold text-sky-400 mb-2">70%</h3>
+                    <p class="text-xs uppercase font-bold text-slate-400 tracking-wider">Market Demand Fulfilled</p>
+                </div>
+                <div class="bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700 card-hover">
+                    <h3 class="text-4xl font-extrabold text-amber-500 mb-2">∞</h3>
+                    <p class="text-xs uppercase font-bold text-slate-400 tracking-wider">Sustainability Focus</p>
+                </div>
+                <div class="bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700 card-hover col-span-2 text-center">
+                    <p class="text-sm font-medium italic text-slate-300">"Your Excellence Partner in Spent Catalyst Regeneration"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Mission Section -->
+    <section id="about" class="bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 mb-6">Molecular Innovation. Industrial Impact.</h2>
+                <div class="w-20 h-1 bg-sky-500 mx-auto rounded-full mb-8"></div>
+                <p class="text-slate-600 text-lg leading-relaxed">
+                    RAR Chemicals Pvt. Ltd. is more than a chemical manufacturer. We are an engineering-first partner providing deep technical expertise in hydrogenation and catalyst lifecycle management.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl transition group">
+                    <div class="w-12 h-12 bg-sky-500 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition">⚗️</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-4">Precision Catalysis</h4>
+                    <p class="text-sm text-slate-500">Specialized Copper and Nickel-based catalysts engineered for maximum yield and longevity in complex reactions.</p>
+                </div>
+                <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl transition group">
+                    <div class="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition">♻️</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-4">Circular Economy</h4>
+                    <p class="text-sm text-slate-500">Expert spent catalyst buy-back and regeneration programs that reduce environmental footprint and operational costs.</p>
+                </div>
+                <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl transition group">
+                    <div class="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition">🔬</div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-4">Sustainable Chemistry</h4>
+                    <p class="text-sm text-slate-500">Pioneering eco-friendly "green" chemicals and bio-based polymers for the next generation of smart industries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Innovation Lab Section ✨ -->
+    <section id="innovation" class="bg-slate-950 text-white py-24">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-8">
+                <div class="max-w-2xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-3 h-3 bg-sky-500 rounded-full pulse-dot"></div>
+                        <span class="text-xs font-mono text-sky-400 uppercase tracking-widest">Active AI Lab Instance</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold brand-font text-white mb-6">AI Innovation Lab ✨</h2>
+                    <p class="text-slate-400 text-lg leading-relaxed">
+                        RAR Chemicals leverages **Gemini AI** to provide real-time technical consultation and sustainability forecasting. Input your parameters below to see the future of molecular engineering.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Smart Catalyst Recommender -->
+                <div class="ai-card p-8 rounded-3xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-sky-500/10 rounded-2xl flex items-center justify-center text-2xl">💡</div>
+                        <div>
+                            <h3 class="text-xl font-bold">Smart Catalyst Recommender</h3>
+                            <p class="text-xs text-slate-500">LLM-Based Technical Advisor</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <label class="block text-xs uppercase font-bold text-slate-500 tracking-wider">Reaction Conditions</label>
+                        <textarea id="recommenderInput" rows="3" class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 text-sm text-slate-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none transition" placeholder="e.g., I am performing hydrogenation of specialized aromatic compounds at 20 bar and 150°C. Which SKU do you suggest?"></textarea>
+                        
+                        <button onclick="handleRecommender()" id="recommenderBtn" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg shadow-sky-900/20">
+                            <span>Get Expert Recommendation ✨</span>
+                        </button>
+                        
+                        <div id="recommenderOutput" class="mt-6 hidden bg-black/40 p-6 rounded-2xl border-l-4 border-sky-500 text-sm text-slate-300 leading-relaxed italic"></div>
+                    </div>
+                </div>
+
+                <!-- Sustainability Impact Analyst -->
+                <div class="ai-card p-8 rounded-3xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center text-2xl">🌿</div>
+                        <div>
+                            <h3 class="text-xl font-bold">Sustainability Impact Analyst</h3>
+                            <p class="text-xs text-slate-500">Carbon & Cost Calculator</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <label class="block text-xs uppercase font-bold text-slate-500 tracking-wider">Environmental Query</label>
+                        <textarea id="sustainabilityInput" rows="3" class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 text-sm text-slate-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition" placeholder="e.g., We have 10 tons of spent Ni-Alumina catalyst. What is the impact of RAR's buy-back vs disposal?"></textarea>
+                        
+                        <button onclick="handleSustainability()" id="sustainabilityBtn" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg shadow-amber-900/20">
+                            <span>Analyze Environmental Impact ✨</span>
+                        </button>
+                        
+                        <div id="sustainabilityOutput" class="mt-6 hidden bg-black/40 p-6 rounded-2xl border-l-4 border-amber-500 text-sm text-slate-300 leading-relaxed italic"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Portfolio Roadmap -->
+    <section id="products" class="bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 brand-font mb-4">Catalyst Portfolio Roadmap</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Providing a strategic pathway from high-volume market solutions to specialized precious metal catalyst tech.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Market Chart 1 -->
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200">
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">Phase 1: Copper Solutions</h3>
+                            <p class="text-sm text-slate-500">CU-301 & CLR-454 Series</p>
+                        </div>
+                        <span class="bg-sky-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Dominant Share</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="marketShareChart"></canvas>
+                    </div>
+                    <p class="mt-8 text-sm text-slate-600 border-t pt-4">Phase 1 products are engineered for bulk demand, covering approximately **70% of standard hydrogenation requirements**.</p>
+                </div>
+
+                <!-- Market Chart 2 -->
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200">
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">Phase 2: Nickel Precision</h3>
+                            <p class="text-sm text-slate-500">NK & NS Advanced Series</p>
+                        </div>
+                        <span class="bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">High Performance</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="nickelCompositionChart"></canvas>
+                    </div>
+                    <p class="mt-8 text-sm text-slate-600 border-t pt-4">Our specialized Nickel formulations on **Alumina and Silica supports** offer tailored loading for specific reaction kinetics.</p>
+                </div>
+            </div>
+
+            <!-- Strategy Bullseye -->
+            <div class="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="bullseye-container">
+                        <div class="circle c-1"><span class="circle-label">Potential Product</span></div>
+                        <div class="circle c-2"><span class="circle-label">Augmented</span></div>
+                        <div class="circle c-3"><span class="circle-label">Expected</span></div>
+                        <div class="circle c-4"><span class="circle-label">Generic</span></div>
+                        <div class="circle c-5"><span class="circle-label">Core Benefit</span></div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 space-y-8">
+                    <h3 class="text-3xl font-bold text-slate-900 brand-font">Product Value Hierarchy</h3>
+                    <p class="text-slate-600 leading-relaxed">We optimize every layer of the value chain. From the core catalytic benefit to augmented services like timely delivery and potential innovations in green chemistry.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 rounded-full bg-amber-500 flex-shrink-0 mt-1"></div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Future Ready (Potential)</h4>
+                                <p class="text-xs text-slate-500">Eco-friendly "green" chemicals, bio-based polymers, and smart packaging systems.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 rounded-full bg-sky-400 flex-shrink-0 mt-1"></div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Service Excellence (Augmented)</h4>
+                                <p class="text-xs text-slate-500">Consistent purity levels, robust global logistics, and safe industrial packaging.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Process Infrastructure -->
+    <section id="infrastructure" class="bg-slate-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div class="max-w-xl">
+                    <h2 class="text-4xl font-bold brand-font mb-4">Core Process Infrastructure</h2>
+                    <p class="text-slate-400">Our startup facilities are equipped with high-capacity machinery designed for SS316 standards and precision thermal processing.</p>
+                </div>
+                <div class="hidden md:block">
+                    <span class="text-5xl font-black text-slate-800 select-none">ENGINEERING</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/30 p-8 rounded-3xl border border-slate-700/50 mb-12">
+                <h3 class="text-xl font-bold text-slate-200 mb-6">Production Capacity Matrix (Liters)</h3>
+                <div class="chart-container">
+                    <canvas id="equipmentChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:bg-slate-700 transition">
+                    <p class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2">Reactors</p>
+                    <p class="text-2xl font-bold">500 L</p>
+                    <p class="text-[10px] text-slate-500 mt-1">SS316 Build</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:bg-slate-700 transition">
+                    <p class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2">Thermal</p>
+                    <p class="text-2xl font-bold">700°C</p>
+                    <p class="text-[10px] text-slate-500 mt-1">Calcination Range</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:bg-slate-700 transition">
+                    <p class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2">Drying</p>
+                    <p class="text-2xl font-bold">24 Trays</p>
+                    <p class="text-[10px] text-slate-500 mt-1">Vacuum Ready</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:bg-slate-700 transition">
+                    <p class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2">Milling</p>
+                    <p class="text-2xl font-bold">3000 L</p>
+                    <p class="text-[10px] text-slate-500 mt-1">High Volume</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center hover:bg-slate-700 transition">
+                    <p class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2">Precision</p>
+                    <p class="text-2xl font-bold">200 Mesh</p>
+                    <p class="text-[10px] text-slate-500 mt-1">Pulverization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" class="bg-slate-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-slate-900 brand-font text-center mb-16">Leadership Team</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Leader 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 text-center group hover:-translate-y-2 transition duration-300">
+                    <div class="w-20 h-20 bg-slate-100 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl group-hover:bg-sky-500 group-hover:text-white transition">👤</div>
+                    <h4 class="text-xl font-bold text-slate-900">Ryan Chettiar</h4>
+                    <p class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-4">Chief Executive Officer</p>
+                    <div class="pt-4 border-t text-sm text-slate-500 space-y-2">
+                        <p class="font-medium">+91 9325 38659</p>
+                        <p class="text-[10px] italic overflow-hidden text-ellipsis">ryanchettiar.in@gmail.com</p>
+                    </div>
+                </div>
+                <!-- Leader 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 text-center group hover:-translate-y-2 transition duration-300">
+                    <div class="w-20 h-20 bg-slate-100 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl group-hover:bg-sky-500 group-hover:text-white transition">👤</div>
+                    <h4 class="text-xl font-bold text-slate-900">Aadan Chettiar</h4>
+                    <p class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-4">Chief Executive Officer</p>
+                    <div class="pt-4 border-t text-sm text-slate-500 space-y-2">
+                        <p class="font-medium">+91 88500 88922</p>
+                        <p class="text-[10px] italic overflow-hidden text-ellipsis">aadanchettiar.in@gmail.com</p>
+                    </div>
+                </div>
+                <!-- Leader 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 text-center group hover:-translate-y-2 transition duration-300">
+                    <div class="w-20 h-20 bg-slate-100 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl group-hover:bg-sky-500 group-hover:text-white transition">👤</div>
+                    <h4 class="text-xl font-bold text-slate-900">Darren Chettiar</h4>
+                    <p class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-4">Chief Executive Officer</p>
+                    <div class="pt-4 border-t text-sm text-slate-500 space-y-2">
+                        <p class="font-medium">+91 90224 30219</p>
+                        <p class="text-[10px] italic overflow-hidden text-ellipsis">darrenchettiar.in@gmail.com</p>
+                    </div>
+                </div>
+                <!-- Leader 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 text-center group hover:-translate-y-2 transition duration-300">
+                    <div class="w-20 h-20 bg-slate-100 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl group-hover:bg-sky-500 group-hover:text-white transition">👤</div>
+                    <h4 class="text-xl font-bold text-slate-900">Ramon Chettiar</h4>
+                    <p class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-4">Chief Executive Officer</p>
+                    <div class="pt-4 border-t text-sm text-slate-500 space-y-2">
+                        <p class="font-medium">+91 86572 62715</p>
+                        <p class="text-[10px] italic overflow-hidden text-ellipsis">ramonchettiar.in@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-950 text-slate-400 py-20 border-t border-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                <div class="space-y-6">
+                    <div class="flex flex-col">
+                        <span class="text-3xl font-extrabold text-white"><span class="text-sky-500">RAR</span> Chemicals</span>
+                        <span class="text-[10px] uppercase tracking-[0.3em] text-slate-600 mt-1">React & Refine</span>
+                    </div>
+                    <p class="text-sm leading-relaxed">
+                        Excellence in hydrogenation and spent catalyst lifecycle management. Empowering global industries through molecular precision and sustainable practices.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h5 class="text-white font-bold uppercase text-xs tracking-widest mb-6">Corporate Office</h5>
+                    <p class="text-sm leading-relaxed">
+                        OFFICE NO. 3 TAKPADA MAKWANA ROAD, <br>
+                        MAROL NAKA, ANDHERI EAST, <br>
+                        MUMBAI 400059.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <h5 class="text-white font-bold uppercase text-xs tracking-widest mb-6">Quick Connect</h5>
+                    <div class="flex gap-4">
+                        <a href="mailto:ryanchettiar.in@gmail.com" class="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center hover:bg-sky-500 hover:text-white transition">📧</a>
+                        <a href="#" class="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center hover:bg-sky-500 hover:text-white transition">💼</a>
+                        <a href="#" class="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center hover:bg-sky-500 hover:text-white transition">🔗</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 pt-8 border-t border-slate-900 text-center">
+                <p class="text-[10px] uppercase tracking-widest text-slate-600">
+                    &copy; 2024 RAR Chemicals Pvt. Ltd. All rights reserved. | Molecular Innovation & Industrial Impact.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- GEMINI API INTEGRATION ---
+        const apiKey = ""; 
+        
+        async function callGemini(prompt, systemInstruction) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+                } catch (error) {
+                    if (i === 4) return "System busy. Please try again shortly.";
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        async function handleRecommender() {
+            const input = document.getElementById('recommenderInput').value;
+            const outputDiv = document.getElementById('recommenderOutput');
+            const btn = document.getElementById('recommenderBtn');
+            if (!input.trim()) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-dots">Consulting Gemini AI</span>';
+            outputDiv.classList.remove('hidden');
+            outputDiv.innerHTML = "Processing molecular parameters...";
+
+            const system = "You are a lead chemical engineer at RAR Chemicals. Recommend specific SKUs from our catalog: Phase 1 (CU-301, CLR-454) or Phase 2 (NK-101, NK-102, NS-201). Explain the chemistry clearly.";
+            
+            const response = await callGemini(input, system);
+            outputDiv.innerHTML = response;
+            btn.disabled = false;
+            btn.innerHTML = 'Get Expert Recommendation ✨';
+        }
+
+        async function handleSustainability() {
+            const input = document.getElementById('sustainabilityInput').value;
+            const outputDiv = document.getElementById('sustainabilityOutput');
+            const btn = document.getElementById('sustainabilityBtn');
+            if (!input.trim()) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-dots">Calculating Impact</span>';
+            outputDiv.classList.remove('hidden');
+            outputDiv.innerHTML = "Analyzing circular economy data...";
+
+            const system = "You are a circular economy specialist at RAR Chemicals. Quantify the benefits of catalyst buy-back and regeneration over simple industrial disposal. Be data-driven.";
+
+            const response = await callGemini(input, system);
+            outputDiv.innerHTML = response;
+            btn.disabled = false;
+            btn.innerHTML = 'Analyze Environmental Impact ✨';
+        }
+
+        // --- CHARTING ENGINE ---
+        function wrapLabel(str, maxLen = 16) {
+            if (str.length <= maxLen) return [str]; // Always return array for Chart.js
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= maxLen) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        Chart.defaults.font.family = "'Montserrat', sans-serif";
+        Chart.defaults.color = '#94a3b8';
+
+        const commonTooltip = {
+            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+            titleFont: { size: 14, weight: 'bold' },
+            bodyFont: { size: 13 },
+            padding: 15,
+            cornerRadius: 10,
+            callbacks: {
+                title: function(tooltipItems) {
+                    const label = tooltipItems[0].chart.data.labels[tooltipItems[0].dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        // Market Share Donut
+        new Chart(document.getElementById('marketShareChart'), {
+            type: 'doughnut',
+            data: {
+                labels: [wrapLabel('Standard Hydrogenation Demand'), wrapLabel('Specialized Niche')],
+                datasets: [{
+                    data: [70, 30],
+                    backgroundColor: ['#0ea5e9', '#e2e8f0'],
+                    borderWidth: 0,
+                    hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    tooltip: commonTooltip,
+                    legend: { position: 'bottom', labels: { padding: 20, font: { size: 10, weight: 600 } } }
+                }
+            }
+        });
+
+        // Nickel Bar Chart
+        new Chart(document.getElementById('nickelCompositionChart'), {
+            type: 'bar',
+            data: {
+                labels: ['NK-101 (10%)', 'NK-102 (15%)', 'NS-201 (10%)'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Ni Content (%)',
+                    data: [10, 15, 10],
+                    backgroundColor: '#0ea5e9',
+                    borderRadius: 8,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 20, grid: { color: 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { tooltip: commonTooltip, legend: { display: false } }
+            }
+        });
+
+        // Infrastructure Horizontal Bar
+        new Chart(document.getElementById('equipmentChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Grinding Mill', 'SS Reactor', 'Mixing Tank'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Liters',
+                    data: [3000, 500, 500],
+                    backgroundColor: '#f59e0b',
+                    borderRadius: 8,
+                    barPercentage: 0.5
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { grid: { color: 'rgba(255,255,255,0.1)' } },
+                    y: { grid: { display: false } }
+                },
+                plugins: { tooltip: commonTooltip, legend: { display: false } }
+            }
+        });
+    </script>
+</body>
+</html>
